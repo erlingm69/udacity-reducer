@@ -7,7 +7,7 @@
     <script src='https://unpkg.com/react@16.3.0-alpha.1/umd/react.development.js'></script>
     <script src='https://unpkg.com/react-dom@16.3.0-alpha.1/umd/react-dom.development.js'></script>
     <script src='https://unpkg.com/babel-standalone@6.15.0/babel.min.js'></script>
-    <script src="https://tylermcginnis.com/goals-todos-api/index.js"></script>    
+    <script src="https://tylermcginnis.com/goals-todos-api/index.js"></script>
 </head>
 
 <body>
@@ -24,7 +24,7 @@
         const TOGGLE_TODO = 'TOGGLE_TODO'
         const ADD_GOAL = 'ADD_GOAL'
         const REMOVE_GOAL = 'REMOVE_GOAL'
-        const RECEIVE_DATA = 'RECEIVE_DATA'        
+        const RECEIVE_DATA = 'RECEIVE_DATA'
 
         function addTodoAction(todo) {
             return {
@@ -182,6 +182,10 @@
 
             toggleItem = (id) => {
                 this.props.store.dispatch(toggleTodoAction(id))
+                return API.saveTodoToggle(id).catch(() => {
+                    alert("An error occurred. Try again!")
+                    this.props.store.dispatch(toggleTodoAction(id))
+                })
             }
 
             render() {
